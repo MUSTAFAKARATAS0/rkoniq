@@ -1,4 +1,3 @@
-    import React from 'react';
     import '@radix-ui/themes/styles.css';
     import { Theme } from '@radix-ui/themes';
     import { ToastContainer } from 'react-toastify';
@@ -7,14 +6,24 @@
 
     import Home from './pages/Home.jsx';
     import NotFound from './pages/NotFound.jsx';
+    import Solutions from './pages/Solutions.jsx';
+    import Products from './pages/Products.jsx';
+    import ProductDetail from './pages/ProductDetail.jsx';
+    import About from './pages/About.jsx';
+    import ContactPage from './pages/ContactPage.jsx';
 
     export default function App() {
       return (
         <Theme appearance="inherit" radius="large" scaling="100%">
           <Router>
-            <main className="min-h-screen bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-50">
+            <main className="min-h-screen bg-white text-gray-900  dark:text-gray-50">
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/cozumler" element={<Solutions />} />
+                <Route path="/urunler" element={<Products />} />
+                <Route path="/urunler/:productId" element={<ProductDetail />} />
+                <Route path="/hakkimizda" element={<About />} />
+                <Route path="/iletisim" element={<ContactPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
               <ToastContainer

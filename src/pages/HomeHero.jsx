@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, ShieldCheck, Network, Users, TrendingUp } from 'lucide-react';
 import heroImage from '../assets/dunya.jpg'; // Görseliniz

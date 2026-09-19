@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { toast } from 'react-toastify';
-import { Mail, Phone, MapPin, Send, Clock, Users } from 'lucide-react';
+import { Mail, Phone, Send, Clock, Users } from 'lucide-react';
 
 const contactSchema = z.object({
   name: z.string().min(2, 'İsim en az 2 karakter olmalıdır'),
@@ -65,7 +65,7 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-24 bg-gradient-to-br from-slate-50 via-white to-emerald-50">
+    <section id="contact" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="text-center mb-20"

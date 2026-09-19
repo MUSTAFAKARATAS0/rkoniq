@@ -1,16 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
     import { motion } from 'framer-motion';
     import { useForm } from 'react-hook-form';
     import { zodResolver } from '@hookform/resolvers/zod';
     import { z } from 'zod';
     import { toast } from 'react-toastify';
     import { 
-      Twitter, 
-      Linkedin, 
-      Github, 
-      Mail, 
-      ArrowRight,
-      Heart
+      ArrowRight
     } from 'lucide-react';
 
     const newsletterSchema = z.object({

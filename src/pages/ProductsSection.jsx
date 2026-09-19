@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
     import { motion, AnimatePresence } from 'framer-motion';
     import { ExternalLink, Filter } from 'lucide-react';
+  import { useNavigate } from 'react-router-dom';
+  import { productCategories } from '../data/products';
 
     const Portfolio = () => {
       const [activeFilter, setActiveFilter] = useState('Tümü');
-      const [selectedProject, setSelectedProject] = useState(null);
+      const navigate = useNavigate();
 
-      const filters = ['Tümü', 'Akıllı Fabrika & Operasyon', 'Bulut & Dijital Çalışma', 'Siber Güvenlik', 'Finansal & Tahsilat Çözümleri', 'İş, Süreç & Müşteri Yönetimi'];
+      const filters = ['Tümü', ...productCategories.map((category) => category.label)];
 
       const projects = [
         {
@@ -178,8 +180,12 @@ import React, { useState } from 'react';
         ? projects 
         : projects.filter(project => project.category === activeFilter);
 
+      const categoryAnchors = Object.fromEntries(
+        productCategories.map((category) => [category.label, category.slug])
+      );
+
       return (
-        <section id="portfolio" className="py-24 bg-slate-50">
+        <section id="portfolio" className="py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               className="text-center mb-16"
@@ -232,13 +238,14 @@ import React, { useState } from 'react';
                 {filteredProjects.map((project) => (
                   <motion.div
                     key={project.id}
+                    id={projects.findIndex((item) => item.category === project.category) === projects.indexOf(project) ? categoryAnchors[project.category] : undefined}
                     className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
                     layout
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.9 }}
                     whileHover={{ y: -8 }}
-                    onClick={() => setSelectedProject(project)}
+                    onClick={() => navigate(`/urunler/${project.id}`, { state: { project } })}
                   >
                     <div className="relative overflow-hidden">
                       <img
@@ -295,67 +302,6 @@ import React, { useState } from 'react';
               </AnimatePresence>
             </motion.div>
 
-            {/* Project Modal */}
-            <AnimatePresence>
-              {selectedProject && (
-                <motion.div
-                  className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  onClick={() => setSelectedProject(null)}
-                >
-                  <motion.div
-                    className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
-                    initial={{ scale: 0.9, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0.9, opacity: 0 }}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <img
-                      src={selectedProject.image}
-                      alt={selectedProject.title}
-                      className="w-full h-64 object-cover"
-                      loading="lazy"
-                      decoding="async"
-                      width="600"
-                      height="400"
-                    />
-                    <div className="p-8">
-                      <h3 className="text-2xl font-bold text-zinc-900 mb-4">
-                        {selectedProject.title}
-                      </h3>
-                      <p className="text-zinc-600 mb-6">
-                        {selectedProject.description}
-                      </p>
-                      <div className="mb-6">
-                        <h4 className="font-semibold text-zinc-900 mb-2">Results:</h4>
-                        <p className="text-emerald-600 font-medium">{selectedProject.results}</p>
-                      </div>
-                      <div className="mb-6">
-                        <h4 className="font-semibold text-zinc-900 mb-2">Technologies:</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {selectedProject.tech.map((tech) => (
-                            <span
-                              key={tech}
-                              className="px-3 py-1 bg-emerald-100 text-emerald-700 text-sm font-medium rounded-full"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                      <button
-                        onClick={() => setSelectedProject(null)}
-                        className="w-full bg-emerald-700 text-white py-3 rounded-full font-semibold hover:bg-emerald-800 transition-colors duration-200"
-                      >
-                        Close
-                      </button>
-                    </div>
-                  </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
           </div>
         </section>
       );

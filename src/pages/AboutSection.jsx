@@ -1,6 +1,5 @@
-import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Cloud, Shield, Video, Server } from 'lucide-react';
+import { ArrowRight, Cloud, Shield, Video } from 'lucide-react';
 
 const HeroSection = () => {
   const features = [
