@@ -14,7 +14,7 @@
           <main>
             <Hero />
             <Features />
-            <Portfolio />
+            <Portfolio limit={3} />
             <Testimonials />
             {/* <Pricing /> */}
             <Contact />

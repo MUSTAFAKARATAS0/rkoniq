@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, ShieldCheck, Network, Users, TrendingUp } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import heroImage from '../assets/dunya.jpg'; // Görseliniz
 
 const Hero = () => {
+  const navigate = useNavigate();
   const features = [
     { icon: ShieldCheck, title: 'Güvenilir İş Ortağı' },
     { icon: Network, title: 'Uçtan Uca Çözümler' },
@@ -43,6 +45,8 @@ const Hero = () => {
             {/* Butonlar */}
             <div className="flex flex-wrap items-center gap-4 mb-10">
               <motion.button
+                type="button"
+                onClick={() => navigate('/urunler')}
                 className="bg-emerald-600 text-white px-8 py-3.5 rounded-xl font-semibold text-base hover:bg-emerald-700 transition-all shadow-md flex items-center group"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}

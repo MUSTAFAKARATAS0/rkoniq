@@ -80,59 +80,7 @@ const HeroSection = () => {
 
         </div>
 
-        {/* Alt Kısım - Güvenilen Teknoloji Ortağı (Bozulmayan Statik Logolar) */}
-        <div className="mt-12 pt-6">
-          <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-8">
-            GÜVENİLEN TEKNOLOJİ ORTAĞI
-          </p>
-
-          <div className="flex flex-wrap items-center justify-between gap-8 text-gray-500">
-            {/* Microsoft */}
-            <div className="flex items-center gap-2 font-semibold text-xl text-gray-700">
-              <div className="grid grid-cols-2 gap-0.5 w-5 h-5">
-                <span className="bg-[#f25022]"></span>
-                <span className="bg-[#7fba00]"></span>
-                <span className="bg-[#00a4ef]"></span>
-                <span className="bg-[#ffb900]"></span>
-              </div>
-              <span>Microsoft</span>
-            </div>
-
-            {/* Google Workspace */}
-            <div className="flex items-center gap-2 font-medium text-lg text-gray-600">
-              <span className="text-blue-500 font-bold">G</span>
-              <span className="text-red-500 font-bold">o</span>
-              <span className="text-yellow-500 font-bold">o</span>
-              <span className="text-blue-500 font-bold">g</span>
-              <span className="text-green-500 font-bold">l</span>
-              <span className="text-red-500 font-bold">e</span>
-              <span className="font-normal text-gray-500 ml-1">Workspace</span>
-            </div>
-
-            {/* AWS */}
-            <div className="flex items-center gap-1 font-bold text-xl text-gray-800">
-              <Cloud className="w-6 h-6 text-orange-500" />
-              <span>aws</span>
-            </div>
-
-            {/* Fortinet */}
-            <div className="flex items-center gap-1.5 font-bold text-lg text-red-700 tracking-wider">
-              <Shield className="w-5 h-5 text-red-600" />
-              <span>FORTINET</span>
-            </div>
-
-            {/* Hikvision */}
-            <div className="flex items-center gap-1.5 font-bold text-lg text-red-600 tracking-widest">
-              <Video className="w-5 h-5 text-gray-700" />
-              <span>HIKVISION</span>
-            </div>
-
-            {/* Ve daha fazlası */}
-            <span className="text-gray-400 text-sm font-medium italic">
-              ve daha fazlası...
-            </span>
-          </div>
-        </div>
+    
       </div>
     </section>
   );

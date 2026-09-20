@@ -246,32 +246,7 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Stats */}
-            <motion.div
-              className="bg-gradient-to-br from-emerald-700 to-green-500 rounded-3xl p-8 text-white"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              <h4 className="text-xl font-bold mb-6">Neden bizi seçmelisiniz?</h4>
-              <div className="grid grid-cols-3 gap-4">
-                {stats.map((stat, index) => (
-                  <motion.div
-                    key={stat.label}
-                    className="text-center"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                  >
-                    <stat.icon className="w-8 h-8 mx-auto mb-2 opacity-80" />
-                    <div className="text-2xl font-bold">{stat.value}</div>
-                    <div className="text-sm opacity-80">{stat.label}</div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
+        
 
            
           </motion.div>
