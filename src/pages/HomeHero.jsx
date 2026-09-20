@@ -1,7 +1,6 @@
-import { motion } from 'framer-motion';
 import { ArrowRight, ShieldCheck, Network, Users, TrendingUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import heroImage from '../assets/dunya.jpg'; // Görseliniz
+import heroImage from '../assets/dunya.jpg';
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -18,12 +17,7 @@ const Hero = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
           {/* SOL TARAF: Metin Alanı */}
-          <motion.div
-            className="lg:col-span-6 text-left z-20"
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+          <div className="lg:col-span-6 text-left z-20">
             <span className="inline-block text-xs md:text-sm font-bold tracking-widest text-zinc-400 uppercase mb-4">
               DAHA AKILLI • DAHA GÜVENLİ • DAHA VERİMLİ
             </span>
@@ -44,34 +38,25 @@ const Hero = () => {
 
             {/* Butonlar */}
             <div className="flex flex-wrap items-center gap-4 mb-10">
-              <motion.button
+              <button
                 type="button"
                 onClick={() => navigate('/urunler')}
                 className="bg-emerald-600 text-white px-8 py-3.5 rounded-xl font-semibold text-base hover:bg-emerald-700 transition-all shadow-md flex items-center group"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
               >
                 Çözümleri Keşfet
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </motion.button>
+              </button>
 
-              <motion.button
+              <button
                 className="border border-zinc-300 text-zinc-700 hover:border-emerald-600 hover:text-emerald-600 px-8 py-3.5 rounded-xl font-semibold text-base transition-all bg-white"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
               >
                 Teklif Al
-              </motion.button>
+              </button>
             </div>
-          </motion.div>
+          </div>
 
           {/* SAĞ TARAF: Özel Geometrik Şekilli Görsel Alanı */}
-          <motion.div
-            className="lg:col-span-6 relative flex justify-end"
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+          <div className="lg:col-span-6 relative flex justify-end">
             {/* Şekilli Görsel Konteyneri */}
             <div className="relative w-full max-w-[580px] h-[480px] md:h-[540px]">
               
@@ -117,17 +102,12 @@ const Hero = () => {
               </div>
 
             </div>
-          </motion.div>
+          </div>
 
         </div>
 
         {/* ALT KISIM: İkonlar */}
-        <motion.div
-          className="mt-12 pt-8 border-t border-zinc-100 grid grid-cols-2 md:grid-cols-4 gap-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
+        <div className="mt-12 pt-8 border-t border-zinc-100 grid grid-cols-2 md:grid-cols-4 gap-6">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
@@ -141,7 +121,7 @@ const Hero = () => {
               </div>
             );
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
