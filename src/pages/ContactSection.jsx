@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { toast } from 'react-toastify';
 import { Mail, Phone, Send, Clock, Users } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
 const contactSchema = z.object({
   name: z.string().min(2, 'İsim en az 2 karakter olmalıdır'),
@@ -15,15 +16,27 @@ const contactSchema = z.object({
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const location = useLocation();
+  const selectedProducts = location.state?.selectedProducts || [];
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
+    setValue
   } = useForm({
     resolver: zodResolver(contactSchema)
   });
+
+  useEffect(() => {
+    if (selectedProducts.length > 0) {
+      setValue(
+        'message',
+        `İlgilendiğim ürünler:\n- ${selectedProducts.join('\n- ')}\n\nHakkında teklif almak istiyorum.`
+      );
+    }
+  }, [selectedProducts, setValue]);
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);

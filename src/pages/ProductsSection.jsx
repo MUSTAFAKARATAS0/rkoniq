@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Filter } from 'lucide-react';
+import { ExternalLink, Filter, Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { productCategories, products } from '../data/products';
 
-    const Portfolio = ({ limit }) => {
+    const ProductSection = ({ limit }) => {
       const [activeFilter, setActiveFilter] = useState('Tümü');
+      const [selectedProducts, setSelectedProducts] = useState([]);
       const navigate = useNavigate();
 
       const filters = ['Tümü', ...productCategories.map((category) => category.label)];
@@ -19,6 +20,18 @@ import { productCategories, products } from '../data/products';
       const categoryAnchors = Object.fromEntries(
         productCategories.map((category) => [category.label, category.slug])
       );
+
+      const toggleProductSelection = (productId) => {
+        setSelectedProducts((current) =>
+          current.includes(productId)
+            ? current.filter((id) => id !== productId)
+            : [...current, productId]
+        );
+      };
+
+      const selectedProductNames = projects
+        .filter((product) => selectedProducts.includes(product.id))
+        .map((product) => product.title);
 
       return (
         <section id="portfolio" className="py-24 bg-white">
@@ -65,6 +78,54 @@ import { productCategories, products } from '../data/products';
               ))}
             </motion.div>
 
+            {selectedProductNames.length > 0 && (
+              <div className="mb-10 rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
+                <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                  <div>
+                    <p className="text-sm font-medium uppercase tracking-[0.12em] text-emerald-700">
+                      Seçilen ürünler
+                    </p>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {selectedProductNames.map((name) => {
+                        const product = projects.find((item) => item.title === name);
+                        const productId = product?.id;
+
+                        return (
+                          <span
+                            key={name}
+                            className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-sm font-medium text-zinc-700 shadow-sm ring-1 ring-emerald-100"
+                          >
+                            {name}
+                            <button
+                              type="button"
+                              onClick={() => productId && toggleProductSelection(productId)}
+                              className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-100 text-xs font-bold text-emerald-700 transition-colors hover:bg-emerald-200"
+                              aria-label={`${name} ürününü seçimden kaldır`}
+                            >
+                              ×
+                            </button>
+                          </span>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      navigate('/iletisim', {
+                        state: { selectedProducts: selectedProductNames }
+                      })
+                    }
+                    className="inline-flex items-center justify-center rounded-full bg-emerald-700 px-6 py-3 text-sm font-semibold text-white shadow-lg transition-colors duration-200 hover:bg-emerald-800"
+                  >
+                    <Check className="mr-2 h-4 w-4" />
+                    Teklif al
+                  </button>
+                </div>
+              </div>
+            )}
+
             {/* Projects Grid */}
             <motion.div
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
@@ -75,13 +136,18 @@ import { productCategories, products } from '../data/products';
                   <motion.div
                     key={project.id}
                     id={projects.findIndex((item) => item.category === project.category) === projects.indexOf(project) ? categoryAnchors[project.category] : undefined}
-                    className="group bg-white rounded-2xl overflow-hidden shadow-lg transition-all duration-200 cursor-pointer"
+                    className={`group rounded-2xl overflow-hidden shadow-lg transition-all duration-200 cursor-pointer border ${
+                      selectedProducts.includes(project.id)
+                        ? 'border-emerald-500 ring-2 ring-emerald-200 bg-emerald-50/40'
+                        : 'border-slate-200 bg-white'
+                    }`}
                     layout
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     whileHover={{ y: 0, scale: 1 }}
                     onClick={() => navigate(`/urunler/${project.id}`, { state: { project } })}
+                    aria-pressed={selectedProducts.includes(project.id)}
                   >
                     <div className="relative overflow-hidden">
                       <img
@@ -93,11 +159,32 @@ import { productCategories, products } from '../data/products';
                         width="600"
                         height="400"
                       />
+
+                      <button
+                        type="button"
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          toggleProductSelection(project.id);
+                        }}
+                        className={`absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full border text-lg font-bold transition-all duration-200 shadow-md ${
+                          selectedProducts.includes(project.id)
+                            ? 'border-emerald-700 bg-emerald-700 text-white shadow-emerald-200 ring-2 ring-emerald-100'
+                            : 'border-white/90 bg-white/95 text-zinc-700 hover:bg-white hover:shadow-lg'
+                        }`}
+                        aria-label={
+                          selectedProducts.includes(project.id)
+                            ? `${project.title} ürününü seçimden kaldır`
+                            : `${project.title} ürününü seç`
+                        }
+                      >
+                        {selectedProducts.includes(project.id) ? '✓' : '+'}
+                      </button>
+
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                         <div className="absolute bottom-4 left-4 right-4">
                           <div className="flex items-center text-white">
                             <ExternalLink className="w-5 h-5 mr-2" />
-                            <span className="font-medium">View Details</span>
+                            <span className="font-medium">Detay</span>
                           </div>
                         </div>
                       </div>
@@ -155,4 +242,4 @@ import { productCategories, products } from '../data/products';
       );
     };
 
-    export default Portfolio;
+    export default ProductSection;

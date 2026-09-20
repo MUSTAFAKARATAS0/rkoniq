@@ -7,7 +7,7 @@
     import Home from './pages/Home.jsx';
     import NotFound from './pages/NotFound.jsx';
     import Solutions from './pages/Solutions.jsx';
-    import Products from './pages/Products.jsx';
+    import ProductSection from './pages/Products.jsx';
     import ProductDetail from './pages/ProductDetail.jsx';
     import About from './pages/About.jsx';
     import ContactPage from './pages/ContactPage.jsx';
@@ -20,7 +20,7 @@
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/cozumler" element={<Solutions />} />
-                <Route path="/urunler" element={<Products />} />
+                <Route path="/urunler" element={<ProductSection />} />
                 <Route path="/urunler/:productId" element={<ProductDetail />} />
                 <Route path="/hakkimizda" element={<About />} />
                 <Route path="/iletisim" element={<ContactPage />} />
