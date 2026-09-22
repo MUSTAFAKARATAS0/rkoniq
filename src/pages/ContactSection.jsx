@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { toast } from 'react-toastify';
-import { Mail, Phone, Send, Clock, Users } from 'lucide-react';
+import { toast } from '../lib/toast.jsx';
+import { Mail, Phone, Send } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 
 const contactSchema = z.object({
@@ -17,8 +17,6 @@ const contactSchema = z.object({
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const location = useLocation();
-  const selectedProducts = location.state?.selectedProducts || [];
-
   const {
     register,
     handleSubmit,
@@ -30,13 +28,15 @@ const Contact = () => {
   });
 
   useEffect(() => {
+    const selectedProducts = location.state?.selectedProducts || [];
+
     if (selectedProducts.length > 0) {
       setValue(
         'message',
         `İlgilendiğim ürünler:\n- ${selectedProducts.join('\n- ')}\n\nHakkında teklif almak istiyorum.`
       );
     }
-  }, [selectedProducts, setValue]);
+  }, [location.state, setValue]);
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
@@ -69,12 +69,6 @@ const Contact = () => {
     //   content: 'Adres bilgisi yakında paylaşılacaktır',
     //   description: 'Türkiye'
     // }
-  ];
-
-  const stats = [
-    { icon: Clock, value: '< 24 saat', label: 'Yanıt Süresi' },
-    { icon: Users, value: '10K+', label: 'Memnun Müşteri' },
-    { icon: Mail, value: '%99', label: 'Memnuniyet Oranı' }
   ];
 
   return (

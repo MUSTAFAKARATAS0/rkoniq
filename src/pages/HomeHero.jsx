@@ -1,6 +1,7 @@
 import { ArrowRight, ShieldCheck, Network, Users, TrendingUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import heroImage from '../assets/dunya.jpg';
+
+const heroImage = '/hero.webp';
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -72,6 +73,10 @@ const Hero = () => {
                 <img
                   src={heroImage}
                   alt="Teknoloji"
+                  width="580"
+                  height="540"
+                  fetchPriority="high"
+                  decoding="sync"
                   className="w-full h-full object-cover object-center"
                 />
 

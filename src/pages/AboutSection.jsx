@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Cloud, Shield, Video } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import officeImage from '../assets/remote/office.webp';
 
 const HeroSection = () => {
   const features = [
@@ -43,12 +44,16 @@ const HeroSection = () => {
           {/* Sağ Taraf - Görsel ve Özellikler Listesi */}
           <div className="w-full lg:w-1/2 relative min-h-[320px] lg:min-h-full flex items-center">
             {/* Arka Plan Görseli */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center"
-              style={{
-                backgroundImage: `url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop')`
-              }}
-            >
+            <div className="absolute inset-0">
+              <img
+                src={officeImage}
+                alt="Modern teknoloji ofisi"
+                width="1200"
+                height="800"
+                loading="lazy"
+                decoding="async"
+                className="h-full w-full object-cover"
+              />
               {/* Geçişli Degrade (Fade Efekti) */}
               <div className="absolute inset-0 bg-gradient-to-r from-white via-white/30 to-transparent lg:via-white/10"></div>
               <div className="absolute inset-0 bg-black/40"></div>

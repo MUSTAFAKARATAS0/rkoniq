@@ -3,6 +3,7 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import Header from './LayoutHeader';
 import Footer from './LayoutFooter';
 import { products } from '../data/products';
+import { getProductImage } from '../data/productImages';
 
 export default function ProductDetail() {
   const { productId } = useParams();
@@ -42,8 +43,12 @@ export default function ProductDetail() {
           <div className="overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-xl shadow-slate-900/10">
             {product.image && (
               <img
-                src={product.image}
+                src={getProductImage(product)}
                 alt={product.title}
+                width="1200"
+                height="600"
+                fetchPriority="high"
+                decoding="async"
                 className="h-72 w-full object-cover sm:h-96"
               />
             )}

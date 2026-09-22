@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ChevronDown, House, Menu, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import logo from '../assets/rklogo.jpeg';
+import logo from '../assets/rklogo.webp';
 import { productCategories, products } from '../data/products';
 
 const Header = () => {
@@ -14,7 +13,7 @@ const Header = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -29,7 +28,6 @@ const Header = () => {
     products: products.filter((product) => product.category === category.label)
   }));
 
-
   const navItems = [
     { label: 'Home', href: '/', icon: House },
     { label: 'Çözümler', href: '/cozumler', items: solutionItems },
@@ -39,30 +37,21 @@ const Header = () => {
   ];
 
   return (
-    <motion.header
-      className="fixed top-0 left-0 right-0 z-50 px-4 pt-3 transition-all duration-300 sm:px-6 lg:px-8"
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
-    >
-      <div className={`mx-auto max-w-7xl rounded-2xl border transition-all duration-300 ${
+    <header className="fixed top-0 left-0 right-0 z-50 px-4 pt-3 sm:px-6 lg:px-8">
+      <div className={`mx-auto max-w-7xl rounded-2xl border transition-colors duration-200 ${
         isScrolled
-          ? 'border-slate-200/80 bg-white/95 shadow-xl shadow-slate-900/5 backdrop-blur-xl'
-          : 'border-white/60 bg-white/75 shadow-lg shadow-slate-900/5 backdrop-blur-md'
+          ? 'border-slate-200 bg-white shadow-xl shadow-slate-900/5'
+          : 'border-slate-200/80 bg-white shadow-lg shadow-slate-900/5'
       }`}>
         <div className="flex h-16 items-center justify-between px-4 sm:px-6">
             <Link to="/">
-              <motion.div
-            className="flex-shrink-0"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
-          >
-            <img src={logo} alt="RKONIQ" className="h-10 w-50 object-contain" />
-              </motion.div>
+              <div className="flex-shrink-0">
+            <img src={logo} alt="RKONIQ" width="200" height="40" decoding="async" className="h-10 w-50 object-contain" />
+              </div>
             </Link>
 
           <nav className="hidden md:block">
-            <div className="flex items-center gap-1 rounded-xl border border-slate-200/70 bg-slate-100/80 p-1 backdrop-blur-sm">
+            <div className="flex items-center gap-1 rounded-xl border border-slate-200/70 bg-slate-100/80 p-1">
               {navItems.map((item) => (
                 <div
                   key={item.label}
@@ -70,24 +59,17 @@ const Header = () => {
                   onMouseEnter={() => item.items && setOpenDropdown(item.label)}
                   onMouseLeave={() => item.items && setOpenDropdown(null)}
                 >
-                  <motion.div
-                    className="relative overflow-hidden rounded-lg px-3 py-2 text-sm font-medium text-zinc-700 transition-all duration-200 hover:bg-white hover:text-emerald-700 sm:px-4"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
+                  <div className="relative overflow-hidden rounded-lg px-3 py-2 text-sm font-medium text-zinc-700 transition-colors duration-200 hover:bg-white hover:text-emerald-700 sm:px-4">
                     <Link to={item.href} className="relative z-10 flex items-center gap-2">
                       {item.icon && <item.icon size={16} strokeWidth={2.2} />}
                       <span>{item.label}</span>
                       {item.items && <ChevronDown size={14} strokeWidth={2.2} />}
                     </Link>
-                  </motion.div>
+                  </div>
 
                   {item.items && openDropdown === item.label && (
-                    <motion.div
+                    <div
                       className={`absolute top-full z-50 rounded-xl border border-slate-200 bg-white p-3 shadow-xl shadow-slate-900/10 ${item.label === 'Ürünler' ? 'left-1/2 w-[min(90vw,900px)] -translate-x-1/2' : 'left-0 w-72'}`}
-                      initial={{ opacity: 0, y: -6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
                     >
                       {item.label === 'Ürünler' ? (
                         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -127,7 +109,7 @@ const Header = () => {
                           </Link>
                         ))
                       )}
-                    </motion.div>
+                    </div>
                   )}
                 </div>
               ))}
@@ -136,13 +118,11 @@ const Header = () => {
 
           <div className="hidden md:block">
             <Link to="/iletisim">
-              <motion.button
-              className="rounded-xl bg-emerald-700 px-5 py-2.5 font-medium text-white shadow-lg shadow-emerald-700/20 transition-all duration-200 hover:bg-emerald-800 hover:shadow-xl"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
+              <button
+              className="rounded-xl bg-emerald-700 px-5 py-2.5 font-medium text-white shadow-lg shadow-emerald-700/20 transition-colors duration-200 hover:bg-emerald-800"
             >
               Teklif Al
-            </motion.button>
+            </button>
             </Link>
           </div>
 
@@ -158,22 +138,15 @@ const Header = () => {
         </div>
       </div>
 
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            className="md:hidden border-t border-slate-200/80 bg-white/95 backdrop-blur-md"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-          >
+      {isMobileMenuOpen && (
+          <div className="md:hidden border-t border-slate-200/80 bg-white">
             <div className="px-4 py-4 space-y-2">
               {navItems.map((item) => (
                 <div key={item.label}>
                   <Link
                   key={item.label}
                   to={item.href}
-                  className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-zinc-900 transition-all duration-200 hover:bg-slate-100 hover:text-emerald-700"
+                  className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-zinc-900 transition-colors duration-200 hover:bg-slate-100 hover:text-emerald-700"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.icon && <item.icon size={17} strokeWidth={2.2} />}
@@ -211,14 +184,13 @@ const Header = () => {
                   )}
                 </div>
               ))}
-              <Link to="/iletisim" className="mt-4 block w-full rounded-xl bg-emerald-700 px-6 py-3 text-center font-medium text-white transition-all duration-200 hover:bg-emerald-800">
+              <Link to="/iletisim" className="mt-4 block w-full rounded-xl bg-emerald-700 px-6 py-3 text-center font-medium text-white transition-colors duration-200 hover:bg-emerald-800">
                 Teklif Al
               </Link>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.header>
+          </div>
+      )}
+    </header>
   );
 };
 

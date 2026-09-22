@@ -1,5 +1,11 @@
     import { motion } from 'framer-motion';
     import { Zap, Shield, BarChart3, Users, Rocket, Brain } from 'lucide-react';
+    import aiImage from '../assets/remote/ai.webp';
+    import iotImage from '../assets/remote/iot.webp';
+    import securityImage from '../assets/remote/security.webp';
+    import businessImage from '../assets/remote/business.webp';
+    import commerceImage from '../assets/remote/commerce.webp';
+    import experienceImage from '../assets/remote/experience.webp';
 
     const Features = () => {
       const features = [
@@ -9,7 +15,7 @@
           slug: 'ai-ve-goruntu-teknolojileri',
           description: 'Yapay zekâ destekli görsel analiz ve otomasyon ile işletmenizin karar süreçlerini hızlandırır.',
           color: 'from-emerald-700 to-emerald-900',
-          image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=900&q=80'
+          image: aiImage
         },
         {
           icon: Zap,
@@ -17,7 +23,7 @@
           slug: 'iot-ve-akilli-operasyonlar',
           description: 'Sensörler, akıllı cihazlar ve otomasyon ile operasyonlarınızı gerçek zamanlı izleyin.',
           color: 'from-emerald-700 to-emerald-900',
-          image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80'
+          image: iotImage
         },
         {
           icon: Shield,
@@ -25,7 +31,7 @@
           slug: 'bulut-ve-siber-guvenlik',
           description: 'Verilerinizi koruyan güvenli altyapı ve gelişmiş güvenlik çözümleriyle riskleri azaltın.',
           color: 'from-emerald-700 to-emerald-900',
-          image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=900&q=80'
+          image: securityImage
         },
         {
           icon: BarChart3,
@@ -33,7 +39,7 @@
           slug: 'is-yazilimlari',
           description: 'İş süreçlerinizi tek panodan yöneterek daha hızlı ve verimli kararlar alın.',
           color: 'from-emerald-700 to-emerald-900',
-          image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80'
+          image: businessImage
         },
         {
           icon: Users,
@@ -41,7 +47,7 @@
           slug: 'fintech-ve-dijital-ticaret',
           description: 'Ölçeklenebilir finans ve e-ticaret çözümleriyle müşteri deneyimini ve satışları artırın.',
           color: 'from-emerald-700 to-emerald-900',
-          image: 'https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=80'
+          image: commerceImage
         },
         {
           icon: Rocket,
@@ -49,7 +55,7 @@
           slug: 'dijital-deneyim',
           description: 'Markanızın dijital temas noktalarını yeniden tasarlayıp kullanıcı sadakatini yükseltin.',
           color: 'from-emerald-700 to-emerald-900',
-          image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80'
+          image: experienceImage
         }
       ];
 
@@ -111,7 +117,11 @@
                     <img
                       src={feature.image}
                       alt={feature.title}
-                      className="absolute inset-0 w-full h-full object-cover blur-[2px] transition-transform duration-200"
+                      loading="lazy"
+                      decoding="async"
+                      width="900"
+                      height="600"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-200"
                     />
 
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-slate-900/40 to-emerald-900/20" />

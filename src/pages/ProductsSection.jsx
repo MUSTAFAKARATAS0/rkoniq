@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Filter, Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { productCategories, products } from '../data/products';
+import { getProductImage } from '../data/productImages';
 
     const ProductSection = ({ limit }) => {
       const [activeFilter, setActiveFilter] = useState('Tümü');
@@ -151,7 +152,7 @@ import { productCategories, products } from '../data/products';
                   >
                     <div className="relative overflow-hidden">
                       <img
-                        src={project.image}
+                        src={getProductImage(project)}
                         alt={project.title}
                         className="w-full h-48 object-cover transition-transform duration-200"
                         loading="lazy"

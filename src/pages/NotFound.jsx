@@ -61,8 +61,6 @@ const NotFound = () => {
             </div>
           </div>
 
-          <div className="absolute inset-0 bg-[url(/images/grain.png)] bg-cover bg-center opacity-60 mix-blend-soft-light z-20"></div>
-
           <div className="absolute bottom-0 left-0 right-0 z-10">
             <svg width="2192" height="771" viewBox="0 0 2192 771" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g opacity="0.35" filter="url(#filter0_f_3740_75)">
