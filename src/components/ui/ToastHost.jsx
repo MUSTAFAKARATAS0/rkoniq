@@ -1,24 +1,15 @@
 import { useEffect, useState } from 'react';
+import { setToastNotifier } from '../../lib/toast.js';
 
-let notify = null;
-
-export const toast = {
-  success(message) {
-    notify?.(message);
-  },
-};
-
-export function ToastHost() {
+export default function ToastHost() {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    notify = (nextMessage) => {
+    setToastNotifier((nextMessage) => {
       setMessage(nextMessage);
       window.setTimeout(() => setMessage(''), 3000);
-    };
-    return () => {
-      notify = null;
-    };
+    });
+    return () => setToastNotifier(null);
   }, []);
 
   if (!message) return null;

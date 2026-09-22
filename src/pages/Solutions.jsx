@@ -1,7 +1,10 @@
-import Header from './LayoutHeader';
-import Features from './SolutionsSection';
-import Footer from './LayoutFooter';
+import PageLayout from '../components/layout/PageLayout.jsx';
+import SolutionsSection from '../components/solutions/SolutionsSection.jsx';
 
 export default function Solutions() {
-  return <><Header /><main className="pt-16"><Features /></main><Footer /></>;
+  return (
+    <PageLayout>
+      <SolutionsSection />
+    </PageLayout>
+  );
 }

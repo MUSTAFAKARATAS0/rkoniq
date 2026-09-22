@@ -1,57 +1,20 @@
-import { useEffect, useRef, useState } from 'react';
-import Header from './LayoutHeader';
-import Hero from './HomeHero';
+import PageLayout from '../components/layout/PageLayout.jsx';
+import Hero from '../components/home/Hero.jsx';
+import DeferredSection from '../components/ui/DeferredSection.jsx';
 
-const loadFeatures = () => import('./SolutionsSection.jsx');
-const loadPortfolio = () => import('./ProductsSection.jsx');
-const loadTestimonials = () => import('./AboutSection.jsx');
-const loadContact = () => import('./ContactSection.jsx');
-const loadFooter = () => import('./LayoutFooter.jsx');
-
-function DeferredSection({ loader, minHeight = 420, ...props }) {
-  const [Section, setSection] = useState(null);
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return undefined;
-
-    let cancelled = false;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        observer.disconnect();
-        loader().then((module) => {
-          if (!cancelled) setSection(() => module.default);
-        });
-      },
-      { rootMargin: '0px', threshold: 0.01 }
-    );
-
-    observer.observe(node);
-    return () => {
-      cancelled = true;
-      observer.disconnect();
-    };
-  }, [loader]);
-
-  if (Section) return <Section {...props} />;
-
-  return <div ref={ref} style={{ minHeight }} aria-hidden="true" />;
-}
+const loadSolutions = () => import('../components/solutions/SolutionsSection.jsx');
+const loadProducts = () => import('../components/products/ProductsSection.jsx');
+const loadAbout = () => import('../components/about/AboutSection.jsx');
+const loadContact = () => import('../components/contact/ContactSection.jsx');
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
-      <Header />
-      <main>
-        <Hero />
-        <DeferredSection loader={loadFeatures} minHeight={720} />
-        <DeferredSection loader={loadPortfolio} limit={3} minHeight={640} />
-        <DeferredSection loader={loadTestimonials} minHeight={520} />
-        <DeferredSection loader={loadContact} minHeight={640} />
-      </main>
-      <DeferredSection loader={loadFooter} minHeight={360} />
-    </div>
+    <PageLayout mainClassName="">
+      <Hero />
+      <DeferredSection loader={loadSolutions} minHeight={720} />
+      <DeferredSection loader={loadProducts} limit={3} minHeight={640} />
+      <DeferredSection loader={loadAbout} minHeight={520} />
+      <DeferredSection loader={loadContact} minHeight={640} />
+    </PageLayout>
   );
 }
