@@ -63,15 +63,16 @@ export default function Products({ limit }) {
             transition={{ duration: 0.25 }}
           >
             <h2 className="mb-6 text-4xl font-bold text-zinc-900 md:text-5xl">
-              Success Stories &
+              Hizmetlerimiz ve <br />
               <span className="bg-gradient-to-r from-emerald-700 to-green-500 bg-clip-text text-transparent">
                 {' '}
-                Case Studies
+                Çözümlerimiz
               </span>
             </h2>
 
             <p className="mx-auto max-w-3xl text-xl text-zinc-600">
-              See how we've helped businesses transform their operations and achieve remarkable results.
+              İşletmenizin verimliliğini, güvenliğini ve büyüme potansiyelini artırmak için geliştirdiğimiz B2B teknoloji
+              çözümlerini keşfedin.
             </p>
           </motion.div>
 
