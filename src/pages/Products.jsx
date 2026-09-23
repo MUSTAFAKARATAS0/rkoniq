@@ -66,7 +66,7 @@ export default function Products({ limit }) {
               Hizmetlerimiz ve <br />
               <span className="bg-gradient-to-r from-emerald-700 to-green-500 bg-clip-text text-transparent">
                 {' '}
-                Çözümlerimiz
+                Ürünlerimiz
               </span>
             </h2>
 

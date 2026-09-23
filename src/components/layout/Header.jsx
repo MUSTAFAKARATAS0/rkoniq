@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/rklogo.webp';
+import logo from '../../assets/rk.png';
 import { productCategories, products } from '../../data/products';
 import { navItems as baseNavItems } from '../../data/navigation';
 
@@ -42,7 +42,7 @@ export default function Header() {
       >
         <div className="flex h-16 items-center justify-between px-4 sm:px-6">
           <Link to="/" className="flex-shrink-0">
-            <img src={logo} alt="RKONIQ" width="200" height="40" decoding="async" className="h-10 w-50 object-contain" />
+            <img src={logo} alt="RKONIQ" width="240" height="48" decoding="async" className="h-12 w-60 object-contain" />
           </Link>
 
           <nav className="hidden md:block">
