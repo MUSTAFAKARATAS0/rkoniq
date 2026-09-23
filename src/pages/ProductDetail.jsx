@@ -1,13 +1,37 @@
-import { ArrowLeft, CheckCircle2 } from 'lucide-react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { ArrowLeft, Check, CheckCircle2 } from 'lucide-react';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import PageLayout from '../components/layout/PageLayout.jsx';
 import { products } from '../data/products';
 import { getProductImage } from '../data/productImages';
 
+const SELECTED_PRODUCTS_KEY = 'rkoniq-selected-products';
+
 export default function ProductDetail() {
   const { productId } = useParams();
   const { state } = useLocation();
+  const navigate = useNavigate();
   const product = state?.project || products.find((item) => String(item.id) === productId);
+  const [isSelected, setIsSelected] = useState(() => {
+    try {
+      const selectedProducts = JSON.parse(sessionStorage.getItem(SELECTED_PRODUCTS_KEY) || '[]');
+      return Boolean(product && selectedProducts.includes(product.id));
+    } catch {
+      return false;
+    }
+  });
+
+  const toggleProductSelection = () => {
+    setIsSelected((selected) => {
+      const storedProducts = JSON.parse(sessionStorage.getItem(SELECTED_PRODUCTS_KEY) || '[]');
+      const nextSelected = selected
+        ? storedProducts.filter((id) => id !== product.id)
+        : [...new Set([...storedProducts, product.id])];
+
+      sessionStorage.setItem(SELECTED_PRODUCTS_KEY, JSON.stringify(nextSelected));
+      return !selected;
+    });
+  };
 
   if (!product) {
     return (
@@ -55,6 +79,34 @@ export default function ProductDetail() {
             {product.description && (
               <p className="mb-8 max-w-3xl text-lg leading-relaxed text-zinc-600">{product.description}</p>
             )}
+
+            <div className="mb-8 flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                onClick={toggleProductSelection}
+                className={`inline-flex items-center rounded-xl px-6 py-3 font-semibold transition-colors ${
+                  isSelected
+                    ? 'bg-emerald-100 text-emerald-800'
+                    : 'bg-emerald-700 text-white hover:bg-emerald-800'
+                }`}
+              >
+                {isSelected && <Check className="mr-2 h-5 w-5" />}
+                {isSelected ? 'Ürün seçildi' : 'Ürünü seç'}
+              </button>
+
+              <button
+                type="button"
+                disabled={!isSelected}
+                onClick={() =>
+                  navigate('/iletisim', {
+                    state: { selectedProducts: [product.title] },
+                  })
+                }
+                className="inline-flex items-center rounded-xl border border-emerald-700 px-6 py-3 font-semibold text-emerald-700 transition-colors hover:bg-emerald-50 disabled:cursor-not-allowed disabled:border-slate-300 disabled:text-slate-400"
+              >
+                Teklif al
+              </button>
+            </div>
 
             {product.results && product.tech && (
               <div className="grid gap-8 border-t border-slate-100 pt-8 sm:grid-cols-2">
