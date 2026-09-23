@@ -34,43 +34,15 @@ export default function Footer() {
         <div className="border-b border-zinc-800 py-16">
           <div className="mx-auto max-w-4xl text-center">
             <h3 className="mb-4 text-3xl font-bold md:text-4xl">
-              Güncel Kalın:
-              <span className="bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent"> RKONIQ</span>
+              <span className="bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent"> Birlikte </span>
+
+              İşinizi geleceğe hazırlayalım
             </h3>
             <p className="mb-8 text-xl text-zinc-400">
-              En güncel gelişmeleri, ipuçlarını ve içgörüleri e-posta kutunuzdan takip edin.
+              Teknoloji gündemini takip etmekten fazlası: daha akıllı operasyonlar, daha güvenli kararlar ve ölçülebilir büyüme için seçilmiş içgörüler.
             </p>
 
-            <form onSubmit={onSubmit} className="mx-auto max-w-md">
-              <div className="flex flex-col gap-4 sm:flex-row">
-                <div className="flex-1">
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="E-posta adresinizi girin"
-                    className={`w-full rounded-full border-2 bg-zinc-800 px-6 py-4 transition-colors duration-200 focus:outline-none focus:ring-0 ${
-                      emailError ? 'border-red-400 focus:border-red-500' : 'border-zinc-700 focus:border-emerald-500'
-                    }`}
-                  />
-                  {emailError && <p className="mt-2 text-left text-sm text-red-400">{emailError}</p>}
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="flex items-center justify-center rounded-full bg-gradient-to-r from-emerald-600 to-green-500 px-8 py-4 font-semibold text-white transition-all duration-200 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  {isSubmitting ? (
-                    <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                  ) : (
-                    <>
-                      Abone Ol
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </>
-                  )}
-                </button>
-              </div>
-            </form>
+            
           </div>
         </div>
 
@@ -83,7 +55,6 @@ export default function Footer() {
                 performansla işletmenizi sınırların ötesine taşıyın.
               </p>
             </div>
-
             {Object.entries(footerLinks).map(([category, links]) => (
               <div key={category}>
                 <h4 className="mb-4 font-semibold text-white">{category}</h4>
