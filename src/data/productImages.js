@@ -10,7 +10,10 @@ const productImages = {
 
 export function getProductImage(product) {
   if (!product) return image1;
-  if (typeof product.image === 'string' && product.image.startsWith('/')) {
+  if (
+    typeof product.image === 'string' &&
+    (product.image.startsWith('/') || product.image.startsWith('http'))
+  ) {
     return product.image;
   }
   return productImages[product.image] || image1;
