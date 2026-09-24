@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ArrowRight, ExternalLink, Filter, Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -163,43 +163,35 @@ export default function Products({ limit }) {
           )}
 
           {/* Ürünler */}
-          <motion.div
-            className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
-            layout
-          >
-            <AnimatePresence>
-              {visibleProjects.map((project) => {
-                const isSelected = selectedProducts.includes(project.id);
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {visibleProjects.map((project) => {
+              const isSelected = selectedProducts.includes(project.id);
 
-                const isCategoryAnchor =
-                  products.findIndex(
-                    (item) => item.category === project.category
-                  ) === products.indexOf(project);
+              const isCategoryAnchor =
+                products.findIndex(
+                  (item) => item.category === project.category
+                ) === products.indexOf(project);
 
-                return (
-                  <motion.div
-                    key={project.id}
-                    id={
-                      isCategoryAnchor
-                        ? categoryAnchors[project.category]
-                        : undefined
-                    }
-                    className={`group cursor-pointer overflow-hidden rounded-2xl border shadow-lg transition-all duration-200 ${
-                      isSelected
-                        ? 'border-emerald-500 bg-emerald-50/40 ring-2 ring-emerald-200'
-                        : 'border-slate-200 bg-white'
-                    }`}
-                    layout
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    onClick={() =>
-                      navigate(`/urunler/${project.id}`, {
-                        state: { project },
-                      })
-                    }
-                    aria-pressed={isSelected}
-                  >
+              return (
+                <div
+                  key={project.id}
+                  id={
+                    isCategoryAnchor
+                      ? categoryAnchors[project.category]
+                      : undefined
+                  }
+                  className={`group cursor-pointer overflow-hidden rounded-2xl border shadow-lg transition-all duration-200 ${
+                    isSelected
+                      ? 'border-emerald-500 bg-emerald-50/40 ring-2 ring-emerald-200'
+                      : 'border-slate-200 bg-white'
+                  }`}
+                  onClick={() =>
+                    navigate(`/urunler/${project.id}`, {
+                      state: { project },
+                    })
+                  }
+                  aria-pressed={isSelected}
+                >
 
                     {/* Ürün Görseli */}
                     <div className="relative overflow-hidden">
@@ -276,11 +268,10 @@ export default function Products({ limit }) {
                       </div>
 
                     </div>
-                  </motion.div>
-                );
-              })}
-            </AnimatePresence>
-          </motion.div>
+                </div>
+              );
+            })}
+          </div>
 
           {limit && filteredProjects.length > limit && (
             <div className="mt-12 flex justify-center">
